@@ -43,10 +43,10 @@ public class SecurityConfig {
         return http
                 .authorizeRequests()
 //                .antMatchers(".user/**").hasRole("ADMIN")                //we don't need ROLE because its automatically concatenating
-                .antMatchers(".user/**").hasAuthority("ROLE_ADMIN")
-//                .antMatchers("/project/**").hasRole("MANAGER")
-//                .antMatchers("/task/employee/**").hasRole("EMPLOYEE")
-//                .antMatchers("/task/**").hasRole("MANAGER")
+                .antMatchers(".user/**").hasAuthority("Admin")
+                .antMatchers("/project/**").hasAuthority("Manager")
+                .antMatchers("/task/employee/**").hasAuthority("Employee")
+                .antMatchers("/task/**").hasAuthority("Manager")
 //                .antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN")
 //                .antMatchers("/task/**").hasAnyAuthority("ROLE_EMPLOYEE") //needs to match with Simple Granted Authority
                 .antMatchers(
