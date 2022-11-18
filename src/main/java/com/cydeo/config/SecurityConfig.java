@@ -19,6 +19,8 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder encoder){
 
+        //Spring users
+
         List<UserDetails> userList = new ArrayList<>();
         userList.add(
                 new User("mike",encoder.encode("password"), Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")))
