@@ -42,10 +42,12 @@ public class SecurityConfig {
 
         return http
                 .authorizeRequests()
-                .antMatchers(".user/**").hasRole("ADMIN")
+                .antMatchers(".user/**").hasRole("ADMIN")                //we don't need ROLE because its automatically concatenating
                 .antMatchers("/project/**").hasRole("MANAGER")
                 .antMatchers("/task/employee/**").hasRole("EMPLOYEE")
                 .antMatchers("/task/**").hasRole("MANAGER")
+                //.antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN")
+                //.antMatchers("/task/**").hasAnyAuthority("ROLE_EMPLOYEE") //needs to match with Simple Granted Authority
                 .antMatchers(
                         "/",
                         "/login",
@@ -56,7 +58,12 @@ public class SecurityConfig {
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic()
+                //.httpBasic() //pop up box
+                .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/welcome")
+                    .failureUrl("/login?error=true")
+                    .permitAll()
                 .and().build();
     }
 
