@@ -1,5 +1,6 @@
 package com.cydeo.config;
 
+import com.cydeo.service.SecurityService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,7 +20,13 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
-//    @Bean
+    private final SecurityService securityService;
+
+    public SecurityConfig(SecurityService securityService) {
+        this.securityService = securityService;
+    }
+
+    //    @Bean
 //    public UserDetailsService userDetailsService(PasswordEncoder encoder){
 //
 //        //Spring users, not entity - ours
@@ -70,7 +77,13 @@ public class SecurityConfig {
                 .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/login")
-                .and().build();
+                .and()
+                .rememberMe()
+                    .tokenValiditySeconds(120)
+                    .key("cydeo")
+                    .userDetailsService(securityService) //capture the user
+                .and()
+                .build();
     }
 
 
