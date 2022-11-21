@@ -50,16 +50,14 @@ public class SecurityConfig {
 //                .antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN")
 //                .antMatchers("/task/**").hasAnyAuthority("ROLE_EMPLOYEE") //needs to match with Simple Granted Authority
                 .antMatchers(
-                        "/",
                         "/login",
                         "/fragments/**",
                         "/assets/**",
                         "/images/**"
-
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                //.httpBasic() //pop up box
+                //.httpBasic() //pop up box from java script/ default
                 .formLogin()
                     .loginPage("/login")
                     //.defaultSuccessUrl("/welcome")

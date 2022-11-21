@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 public class BaseEntityListener extends AuditingEntityListener {
 
 
-
     @PrePersist
     private void onPrePersist(BaseEntity baseEntity){
 
